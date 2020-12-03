@@ -35,6 +35,10 @@ export class ListsService {
       .pipe(map(this.createArrayList));
   }
 
+  getListByID(id: string) {
+    return this.http.get(`${this.url}/lists/${id}.json`);
+  }
+
   private createArrayList(listsObj: object) {
     if (listsObj === null) {
       return [];
