@@ -10,33 +10,28 @@
   </div>
 </div>
 
-<table class="table mt-3 animate__animated animate__fadeInLeft animate__faster">
+<table class="table mt-3 animate__animated animate__fadeIn animate__faster">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Name</th>
+      <th scope="col">Collection</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let list of lists; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ list.name }}</td>
+      <td>{{ list.collection }}</td>
+      <td>
+        <label *ngIf="list.status" class="badge badge-success"
+          ><i class="fa fa-times-badge"></i>Done</label
+        >
+        <label *ngIf="!list.status" class="badge badge-danger"
+          ><i class="fa fa-times-badge"></i>Undone</label
+        >
+      </td>
     </tr>
   </tbody>
 </table>
