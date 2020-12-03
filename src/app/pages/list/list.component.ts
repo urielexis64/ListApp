@@ -4,6 +4,7 @@ import { ListModel } from '../../models/list.model';
 import { ListsService } from '../../services/lists.service';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -13,12 +14,19 @@ import { Observable } from 'rxjs';
 export class ListComponent implements OnInit {
   list = new ListModel();
 
-  constructor(private listsService: ListsService) {}
+  constructor(
+    private listsService: ListsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.listsService.getLists().subscribe((resp) => {
-      console.log(resp);
-    });
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id !== 'new') {
+      this.listsService.getListByID(id).subscribe((response: ListModel) => {
+        this.list = response;
+        this.list.id = id;
+      });
+    }
   }
 
   save(form: NgForm) {
