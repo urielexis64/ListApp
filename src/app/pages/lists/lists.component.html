@@ -10,7 +10,10 @@
   </div>
 </div>
 
-<table class="table mt-3 animate__animated animate__fadeIn animate__faster">
+<table
+  *ngIf="!loading && lists.length !== 0"
+  class="table mt-3 animate__animated animate__fadeIn animate__faster"
+>
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -37,7 +40,7 @@
         <button class="btn btn-info mr-1" [routerLink]="['/list', list.id]">
           <i class="fa fa-pen"> </i>
         </button>
-        <button class="btn btn-danger">
+        <button (click)="delete(list.id, i)" class="btn btn-danger">
           <i class="fa fa-trash"> </i>
         </button>
       </td>
@@ -45,7 +48,10 @@
   </tbody>
 </table>
 
-<div *ngIf="lists.length !== 0" class="alert alert-info text-center mt-3">
+<div
+  *ngIf="loading"
+  class="alert alert-info text-center mt-3 animate__animated animate__fadeIn"
+>
   <h4 class="alert-heading">Loading...</h4>
   <p>
     <i class="fa fa-sync-alt fa-spin fa-2x"> </i>
@@ -53,7 +59,10 @@
   <p class="mb-0">Wait please...</p>
 </div>
 
-<div *ngIf="lists.length === 0" class="alert alert-warning text-center mt-3">
+<div
+  *ngIf="lists.length === 0 && !loading"
+  class="alert alert-warning text-center mt-3 animate__animated animate__bounceIn"
+>
   <h4 class="alert-heading">There's no lists...</h4>
   <p>
     <i class="fa fa-exclamation fa-2x"> </i>
