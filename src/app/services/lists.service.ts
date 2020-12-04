@@ -39,6 +39,10 @@ export class ListsService {
     return this.http.get(`${this.url}/lists/${id}.json`);
   }
 
+  deleteList(id: string) {
+    return this.http.delete(`${this.url}/lists/${id}.json`);
+  }
+
   private createArrayList(listsObj: object) {
     if (listsObj === null) {
       return [];
@@ -48,7 +52,6 @@ export class ListsService {
     Object.keys(listsObj).forEach((key) => {
       const list: ListModel = listsObj[key];
       list.id = key;
-
       lists.push(list);
     });
     return lists;
